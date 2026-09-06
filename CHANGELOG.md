@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+- **fix(scripts): `scripts/ingest_all.py` takes its sources from the command
+  line.** Remove the built-in list of six source roots. The stale
+  `cymatix_context.provenance` import had also stopped the script before
+  argument parsing; it is repaired here (the module moved into the identity
+  package in an earlier restructure). Missing `--sources` now prints usage and
+  exits 2 unless `--sharded --agent-source` is supplied. Monolithic agent-only
+  runs now error; sharded agent-only runs no longer also consider the removed
+  corpus roots. Explicit-source parsing and selection are unchanged once the
+  module is reachable. Test: `tests/test_ingest_all_sources.py`.
+
 ## 0.9.2 (2026-09-05)
 
 **Ingest at scale and the #411 default flip (PRs #424, #425), a
